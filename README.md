@@ -2,6 +2,7 @@ yt2srt
 ======
 
 Quick Ruby script to convert Youtube Captions subtitles to [SubRip (.srt)][1] format.
+Prebuild gem available at [RubyGems][2]
 
 Copyright (c) 2013, Christiaan Rakowski
 All rights reserved.
@@ -14,3 +15,4 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
 
 [1]: http://en.wikipedia.org/wiki/SubRip "SubRip format Wikipedia article"
+[2]: https://rubygems.org/gems/yt2srt
