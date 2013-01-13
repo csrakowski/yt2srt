@@ -12,8 +12,18 @@
 #(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
 #WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-
+#Main Yt2srt class, contains helper methods to convert Youtube Captions subtitles to SubRip (.srt) format
 class Yt2srt
+
+	# Helper method, used to convert a single line
+	#
+	# Example:
+	#   >> convert_line(index, line)
+	#
+	# Arguments:
+	#   index: (Integer)
+	#   line: (String)
+	
 	def self.convert_line(index, line)
 		startTime = line[/(\d+:)?\d+:\d+/]
 		if startTime.index(':') == 1
@@ -42,10 +52,21 @@ class Yt2srt
 		return "#{index}\n00:#{startTime},000 --> 00:#{endTime},000\n#{text}\n"
 	end
 
+	private_class_method :convert_line
+	
+	# Main method, used to convert Youtube Captions subtitles to SubRip (.srt) format
+	#
+	# Example:
+	#   >> Yt2srt.convert(input, output)
+	#
+	# Arguments:
+	#   input_file: (String)
+	#   output_file: (String)
+	
 	def self.convert(input_file, output_file)
 		puts "Starting conversion: #{input_file} --> #{output_file}"
 		text=File.open(input_file).read
-		ofx = File.open(output_file, 'w')
+		ofx= File.open(output_file, 'w')
 		text.gsub!(/\r\n?/, "\n")
 		text.each_line.with_index(1) do |line, index|	
 			newLine = convert_line(index, line);
